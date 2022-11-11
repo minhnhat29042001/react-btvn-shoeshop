@@ -1,1 +1,1 @@
-# react-btvn-shoeshop
+# Đây là dự án để học react 

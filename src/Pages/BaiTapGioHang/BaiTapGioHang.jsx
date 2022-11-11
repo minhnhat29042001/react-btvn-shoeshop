@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
 import DanhSachSanPham from './DanhSachSanPham'
 import GioHang from './GioHang'
+import Modal from './Modal'
 
 export default class BaiTapGioHang extends Component {
     state={
         gioHang:[
-            { "id": 1, "name": "Adidas Prophere",price:350,image:'http://svcy3.myclass.vn/images/adidas-prophere.png',soLuong:1}
-        ]
+            { id: 1, name: "Adidas Prophere", price:350,image:'http://svcy3.myclass.vn/images/adidas-prophere.png',soLuong:1}
+        ],
+        modalVisible: false
     }
 
     xoaGiohang =(maSPClick)=>{
@@ -20,7 +22,8 @@ export default class BaiTapGioHang extends Component {
 
         //set Stae
         this.setState({
-            giohang:gioHang
+            ...this.state,
+            gioHang:gioHang
         })
     }
 
@@ -35,6 +38,7 @@ export default class BaiTapGioHang extends Component {
             gioHang.push(spClick);
         }
         this.setState({
+            ...this.state,
             gioHang:gioHang
         })
     }
@@ -49,10 +53,17 @@ export default class BaiTapGioHang extends Component {
     */ 
 
     return (
-      <div className='container'>
+      <div className='container h-full'>
         <h3 className='text-center mt-2'>Bài tập giỏ hàng</h3>
-        <GioHang gioHang={this.state.gioHang} xoaGioHang={this.xoaGiohang}/>
+        <button onClick={() => this.setState({
+            ...this.state,
+            modalVisible: true
+        })}> <i className='fa fa-cart-plus'></i>Check giỏ hàng</button>
         <DanhSachSanPham themGioHang={this.themGioHang}/>
+        <Modal gioHang={this.state.gioHang} xoaGiohang={this.xoaGiohang} modalVisible={this.state.modalVisible} onClose={() => this.setState({
+            ...this.state,
+            modalVisible: false
+        })}/>
       </div>
     )
   }

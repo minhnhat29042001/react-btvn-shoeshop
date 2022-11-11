@@ -34,7 +34,6 @@ root.render(
         <Route path='btgiohang' element={<BaiTapGioHang/>}></Route>
         <Route path='*' element={<Navigate to=""/>}></Route>
       </Route>
- 
     </Routes>
    </BrowserRouter>
   </>

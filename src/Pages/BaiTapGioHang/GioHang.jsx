@@ -4,7 +4,7 @@ export default class GioHang extends Component {
   render() {
     const {gioHang,xoaGioHang} =this.props;
     return (
-      <table className='table' style={{backgroundColor: '#E1e1e1', margin: 'auto'}}>
+      <table className='table'>
         <thead>
             <tr>
               <th>Mã SP</th>

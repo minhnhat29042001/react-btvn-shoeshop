@@ -126,10 +126,10 @@ import SanPham from './SanPham'
 export default class DanhSachSanPham extends Component {
 
   renderPhone=()=>{
-    const {themGioHang} =this.props;
+    const {themGioHang,xemChiTiet} =this.props;
     return dataShoe.map((shoeOb,index)=>{
       return <div className='col-4' key={index}>
-          <SanPham shoe={shoeOb} themGioHang={themGioHang}/>
+          <SanPham shoe={shoeOb} themGioHang={themGioHang} xemChiTiet={xemChiTiet}/>
 
       </div>
     })

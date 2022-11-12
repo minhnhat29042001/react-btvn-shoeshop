@@ -5,15 +5,26 @@ import Modal from './Modal'
 
 export default class BaiTapGioHang extends Component {
     state={
+        thongTinChiTiet:{
+            id:'',
+            ten:'',
+            price:'',
+            image:'',
+            description:'',
+            shortDescription:''
+        },
         gioHang:[
-            { id: 1, name: "Adidas Prophere", price:350,image:'http://svcy3.myclass.vn/images/adidas-prophere.png',soLuong:1}
-        ],
-        modalVisible: false
+            { "id": 1, "name": "Adidas Prophere",price:350,image:'http://svcy3.myclass.vn/images/adidas-prophere.png',soLuong:1}
+        ]
+    
+
+        
     }
 
     xoaGiohang =(maSPClick)=>{
         let gioHang = this.state.gioHang;
-        let index=gioHang.findIndex(sp=> sp.maSP ==maSPClick);
+        let index=gioHang.findIndex(sp=> sp.id === maSPClick);
+        console.log(index);
         if(index !== -1){
             gioHang.splice(index,1);
         }
@@ -22,8 +33,7 @@ export default class BaiTapGioHang extends Component {
 
         //set Stae
         this.setState({
-            ...this.state,
-            gioHang:gioHang
+            giohang:gioHang
         })
     }
 
@@ -38,8 +48,22 @@ export default class BaiTapGioHang extends Component {
             gioHang.push(spClick);
         }
         this.setState({
-            ...this.state,
             gioHang:gioHang
+        })
+    }
+
+    xemChiTiet =(spClick)=>{
+        spClick ={...spClick};
+        console.log(spClick.id);
+        let thongTinSanPhamChiTiet = this.state.thongTinChiTiet;
+        thongTinSanPhamChiTiet.id=spClick.id;
+        thongTinSanPhamChiTiet.ten=spClick.name;
+        thongTinSanPhamChiTiet.price=spClick.price;
+        thongTinSanPhamChiTiet.image=spClick.image;
+        thongTinSanPhamChiTiet.description=spClick.description;
+        thongTinSanPhamChiTiet.shortDescription=spClick.shortDescription;
+        this.setState({
+            thongTinChiTiet:thongTinSanPhamChiTiet
         })
     }
        
@@ -53,17 +77,11 @@ export default class BaiTapGioHang extends Component {
     */ 
 
     return (
-      <div className='container h-full'>
+      <div className='container'>
         <h3 className='text-center mt-2'>Bài tập giỏ hàng</h3>
-        <button onClick={() => this.setState({
-            ...this.state,
-            modalVisible: true
-        })}> <i className='fa fa-cart-plus'></i>Check giỏ hàng</button>
-        <DanhSachSanPham themGioHang={this.themGioHang}/>
-        <Modal gioHang={this.state.gioHang} xoaGiohang={this.xoaGiohang} modalVisible={this.state.modalVisible} onClose={() => this.setState({
-            ...this.state,
-            modalVisible: false
-        })}/>
+        <GioHang gioHang={this.state.gioHang} xoaGioHang={this.xoaGiohang}/>
+        <DanhSachSanPham themGioHang={this.themGioHang} xemChiTiet={this.xemChiTiet}/>
+        <Modal thongTinChiTiet={this.state.thongTinChiTiet}/>
       </div>
     )
   }
